@@ -47,6 +47,19 @@ internal class DeckCommand : Command
                         return;
                 }
                 break;
+            case 3:
+                switch(args[0])
+                {
+                case "removecard":
+                case "rc":
+                    if(!int.TryParse(args[2], out int index))
+                    {
+                        throw new Exception("Expected index");
+                    }
+                    RemoveCard(args[1], index);
+                    return;
+                }
+                break;
             }
         }
         catch (Exception e)
@@ -78,6 +91,13 @@ internal class DeckCommand : Command
             Console.WriteLine("Aborting");
         }
     }
+
+    private void RemoveCard(string deckName, int cardIndex)
+    {
+        var deck = DeckManager.GetDeck(deckName);
+        deck.RemoveCard(cardIndex);
+    }
+
     private void PrintDecks(Deck[] decks)
     {
         if(decks.Length == 0)
@@ -96,13 +116,13 @@ internal class DeckCommand : Command
     {
         if(cards.Length == 0)
         {
-            Console.WriteLine("There are no cards in this deck! Use 'deck addcard <deckName> to add one'");
+            Console.WriteLine("There are no cards in this deck! Use 'deck addcard <deckName> to add one");
             return;
         }
 
         for(int i = 0; i < cards.Length; i++)
         {
-            Console.WriteLine(cards[i].Front);
+            Console.WriteLine($"{i} - {cards[i].Front}");
         }
     }
 }

@@ -14,6 +14,15 @@ public class Deck
         m_cards.Add(card);
     }
 
+    public void RemoveCard(int index)
+    {
+        if(index < 0 || index >= m_cards.Count)
+        {
+            throw new Exception("Index out of bounds");
+        }
+        m_cards.RemoveAt(index);
+    }
+
     public Card[] GetCards()
     {
         return m_cards.ToArray();
