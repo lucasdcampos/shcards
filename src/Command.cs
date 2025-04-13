@@ -1,12 +1,12 @@
 public abstract class Command
 {
-    public abstract void Execute(string[] args);
-}
-
-internal class ClearCommand : Command
-{
-    public override void Execute(string[] args)
+    public Command(string name, string desc)
     {
-        Console.Clear();
+        Name = name;
+        Description = desc;
     }
+
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public abstract void Execute(string[] args);
 }

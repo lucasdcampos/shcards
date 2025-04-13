@@ -1,10 +1,10 @@
 ﻿internal class Program
 {
-    static Dictionary<string, Command> commands = new();
     static void Main(string[] args) 
     {
-        commands.Add("clear", new ClearCommand());
-        commands.Add("deck", new DeckCommand());
+        CommandManager.Register(new HelpCommand("help", "View the List of commands"));
+        CommandManager.Register(new ClearCommand("clear", "Clears the screen"));
+        CommandManager.Register(new DeckCommand("deck", "Manages your Decks"));
 
         if(args.Length > 1)
         {
@@ -23,11 +23,13 @@
 
     static void ExecuteCommand(string cmd, string[] args)
     {
-        if(!commands.ContainsKey(cmd))
+        try
         {
-            Console.WriteLine($"Unknown command: {cmd}");
-            return;
+            CommandManager.ExecuteCommand(cmd, args);
         }
-        commands[cmd].Execute(args);
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
     }
 }

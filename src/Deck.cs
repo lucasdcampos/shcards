@@ -8,4 +8,9 @@ public class Deck
         m_cards = new();
         Name = name;
     }
+
+    public void AddCard(Card card)
+    {
+        m_cards.Add(card);
+    }
 }
