@@ -41,6 +41,10 @@ internal class DeckCommand : Command
                     case "s":
                         //DeckManager.GetDack(args[1]);
                         return;
+                    case "listcards":
+                    case "lc":
+                        PrintCards(DeckManager.GetDeck(args[1]).GetCards());
+                        return;
                 }
                 break;
             }
@@ -78,13 +82,27 @@ internal class DeckCommand : Command
     {
         if(decks.Length == 0)
         {
-            Console.WriteLine("There are no registered decks! Use 'deck create <name>' to create one");
+            Console.WriteLine("There are no registered decks! Use 'deck create <deckName>' to create one");
             return;
         }
 
         for(int i = 0; i < decks.Length; i++)
         {
             Console.WriteLine(decks[i].Name);
+        }
+    }
+
+    private void PrintCards(Card[] cards)
+    {
+        if(cards.Length == 0)
+        {
+            Console.WriteLine("There are no cards in this deck! Use 'deck addcard <deckName> to add one'");
+            return;
+        }
+
+        for(int i = 0; i < cards.Length; i++)
+        {
+            Console.WriteLine(cards[i].Front);
         }
     }
 }

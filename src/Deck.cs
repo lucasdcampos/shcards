@@ -13,4 +13,9 @@ public class Deck
     {
         m_cards.Add(card);
     }
+
+    public Card[] GetCards()
+    {
+        return m_cards.ToArray();
+    }
 }
