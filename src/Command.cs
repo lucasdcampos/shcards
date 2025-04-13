@@ -3,11 +3,10 @@ public abstract class Command
     public abstract void Execute(string[] args);
 }
 
-// Just for testing purposes
-internal class PingCommand : Command
+internal class ClearCommand : Command
 {
     public override void Execute(string[] args)
     {
-        Console.WriteLine("Pong!");
+        Console.Clear();
     }
 }

@@ -3,7 +3,8 @@
     static Dictionary<string, Command> commands = new();
     static void Main(string[] args) 
     {
-        commands.Add("ping", new PingCommand());
+        commands.Add("clear", new ClearCommand());
+        commands.Add("deck", new DeckCommand());
 
         if(args.Length > 1)
         {
@@ -12,8 +13,12 @@
             return;
         }
 
-        string[] cargs = Console.ReadLine().Split();
-        ExecuteCommand(cargs[0], cargs.Skip(1).ToArray());
+        while(true)
+        {
+            Console.Write("> ");
+            string[] cargs = Console.ReadLine().Split();
+            ExecuteCommand(cargs[0], cargs.Skip(1).ToArray());
+        }
     }
 
     static void ExecuteCommand(string cmd, string[] args)
